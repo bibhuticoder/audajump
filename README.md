@@ -3,6 +3,8 @@ Make the bunny jump with your voice. Its an experimental project to make a user-
 
 ## demo
 
+- make a loud voice to make the player jump.
+
 https://bibhuticoder.github.io/audajump/
 
 ## issues
