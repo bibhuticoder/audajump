@@ -1,0 +1,144 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+	<meta charset="UTF-8" />
+	<title>Audajump</title>
+	<script type="text/javascript" src="js/phaser.min.js"></script>   
+   
+	<!---P5 sound -->
+	<script language="javascript" type="text/javascript" src="p5.js"></script>
+    <script language="javascript" type="text/javascript" src="p5.dom.js"></script> 
+	<script language="javascript" type="text/javascript" src="p5.sound.min.js"></script> 
+
+</head>
+<body>
+
+<script type="text/javascript">
+
+    var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+    var score = 0, scoreText;
+    
+    function preload() {
+        game.load.image('bg', 'assets/bg.png');
+      
+        game.load.image('ground', 'assets/platform.png');
+
+        //bunny
+        game.load.atlasJSONHash('bunny', 'assets/bunny.png', 'assets/bunny.json');
+
+        //obstacle
+        game.load.image('obstacle', 'assets/firstaid.png');       
+      
+
+    }
+
+    function create() {
+
+        //set physics engine
+        game.physics.startSystem(Phaser.Physics.ARCADE);    
+        game.add.sprite(0, 0, 'bg');
+               
+        //platform
+        platforms = game.add.group();   
+        platforms.enableBody = true;   
+
+        //ground
+        var ground = platforms.create(0, game.world.height - 64, 'ground');    
+        ground.scale.setTo(2, 2);   
+        ground.body.immovable = true;        
+       
+        bunny = game.add.sprite(100, game.world.height - 150, 'bunny');
+        bunny.scale.setTo(1, 1);
+        bunny.frame = 3;
+        bunny.anchor.setTo(0.5, 0.5);
+        game.physics.arcade.enable(bunny);
+        bunny.body.bounce.y = 0.2;
+        bunny.body.gravity.y = 1500;        
+        bunny.body.collideWorldBounds = true;    
+        bunny.animations.add('side', [4, 5], 10, true);    
+       
+        cursors = game.input.keyboard.createCursorKeys();
+
+        obstacles = game.add.group();
+        obstacles.enableBody = true;        
+
+        scoreText = game.add.text(16, 16, 'Score : 0', { fontSize: '32px', fill: '#000' });        
+       
+    }
+
+	 var hitPlatform;
+    function update() {
+        hitPlatform = game.physics.arcade.collide(bunny, platforms);
+                       
+        //craete and move obstacles if less than 3       
+        if (obstacles.countLiving() < 3) {            
+            var o;           
+            o = game.add.sprite(random(800, 2000), game.world.height - 100, 'obstacle'); 
+            obstacles.add(o);
+        }
+        
+        obstacles.forEachAlive(function(o){
+            o.body.velocity.x = -200;
+            o.body.acceleration.x = 10;
+
+            if(o.body.x < -100){
+                o.kill(); 
+                scoreText.setText("Score : " + (++score));
+            } 
+
+        })
+        
+       
+        bunny.body.velocity.x = 0;
+        bunny.animations.play('side');
+         
+        //  Allow the player to jump if they are touching the ground.
+        if (cursors.up.isDown && bunny.body.touching.down && hitPlatform) {
+           jump(); 
+        }
+        
+
+        game.physics.arcade.collide(obstacles, platforms);
+
+        game.physics.arcade.overlap(bunny, obstacles, incScore, null, this);
+
+        function incScore (player, obs) {   
+            scoreText.setText("Score : " + (--score));
+            obs.kill();
+        }
+        
+        
+    }
+	
+	function jump(){
+		 bunny.body.velocity.y = -550;
+        // console.log(spectrum);
+	}
+        
+    function random(min, max){  
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    
+    
+    //p5 audio
+    mic = new p5.AudioIn();
+    mic.start();
+    
+setInterval(function(){
+    var level = mic.getLevel();
+    console.log(level);
+    if(level > 0.01 && bunny.body.touching.down && hitPlatform){
+        console.log("jump");
+        jump();
+    }
+
+}, 100);
+    
+    
+    
+    
+</script>
+
+</body>
+</html>
