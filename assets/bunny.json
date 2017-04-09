@@ -1,0 +1,60 @@
+{"frames": {
+
+"bunny2_hurt.png":
+{
+	"frame": {"x":1,"y":1,"w":63,"h":73},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":73},
+	"sourceSize": {"w":63,"h":73}
+},
+"bunny2_jump.png":
+{
+	"frame": {"x":66,"y":1,"w":63,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":75},
+	"sourceSize": {"w":63,"h":75}
+},
+"bunny2_ready.png":
+{
+	"frame": {"x":131,"y":1,"w":50,"h":80},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":80},
+	"sourceSize": {"w":50,"h":80}
+},
+"bunny2_stand.png":
+{
+	"frame": {"x":183,"y":1,"w":50,"h":84},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":84},
+	"sourceSize": {"w":50,"h":84}
+},
+"bunny2_walk1.png":
+{
+	"frame": {"x":235,"y":1,"w":50,"h":84},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":84},
+	"sourceSize": {"w":50,"h":84}
+},
+"bunny2_walk2.png":
+{
+	"frame": {"x":287,"y":1,"w":50,"h":86},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":50,"h":86},
+	"sourceSize": {"w":50,"h":86}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "bunny.png",
+	"format": "RGBA8888",
+	"size": {"w":338,"h":88},
+	"scale": "0.41667",
+	"smartupdate": "$TexturePacker:SmartUpdate:bd0fdc89c306b7ac9cc66627b4879fbf:c8e28e4b7953977728da3fb577a21969:8cd39669a6554f33ec81b353c76b4981$"
+}
+}
